@@ -1,0 +1,162 @@
+body { 
+	padding-top: 70px; 
+	background-color: GhostWhite;
+}
+
+.borderless > thead > tr > th, 
+.borderless > tbody > tr > th, 
+.borderless > tfoot > tr > th, 
+.borderless > thead > tr > td, 
+.borderless > tbody > tr > td, 
+.borderless > tfoot > tr > td {
+	border-top: 0px;
+}
+
+.nopaddingrow > thead > tr > th, 
+.nopaddingrow > tbody > tr > th, 
+.nopaddingrow > tfoot > tr > th, 
+.nopaddingrow > thead > tr > td, 
+.nopaddingrow > tbody > tr > td, 
+.nopaddingrow > tfoot > tr > td {
+	padding: 0px;
+}
+
+.no-underline a:hover,
+.no-underline a:focus {
+	text-decoration: none;
+}
+
+.no-padding {
+	padding: 2px;
+}
+
+.no-margin {
+	margin: 0px;
+}
+
+strong.title {
+	font-size: 30px;
+}
+
+.valign-middle {
+	vertical-align: middle; !important
+}
+
+.valign-top {
+	vertical-align: top;	
+}
+
+.cursor-crosshair {
+	cursor: crosshair;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.footer {
+	text-align: center;
+	font-size: x-small;	
+}
+
+.dataTables_info {
+	font-size: 12px;
+}
+
+.sidebar {
+	display: block;
+	width: 100%;
+	background: #333;
+}
+
+.sidebar-nav {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-nav ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.sidebar-nav a, .sidebar-nav a:hover, .sidebar-nav a:focus, .sidebar-nav a:active {
+	outline: none;
+}
+
+.sidebar-nav ul li, .sidebar-nav ul a {
+	display: block;
+}
+
+.sidebar-nav ul a {
+	padding: 8px 10px;
+	color: #23527C;
+	border-top: 1px solid rgba(0, 0, 0, 0.3);
+	/*box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.05) inset;*/
+	/*text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);*/
+}
+
+.sidebar-nav ul a:hover, .sidebar-nav ul a:focus, .sidebar-nav ul a:active {
+	color: #000000;
+	text-decoration: none;
+}
+
+.sidebar-nav ul ul a {
+	padding: 8px 18px;
+	background-color: rgba(244, 244, 244, 1);
+}
+
+.sidebar-nav ul ul ul a {
+	padding: 8px 18px;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.sidebar-nav ul ul a:hover, .sidebar-nav ul ul a:focus, .sidebar-nav ul ul a:active {
+	background-color: rgba(230, 230, 230, 1);
+}
+
+.sidebar-nav-item {
+	padding-left: 3px;
+}
+
+.sidebar-nav-item-icon {
+	padding-right: 3px;
+}
+
+.override-navbar-collapse {
+	padding-right: 0px;
+	padding-left: 0px;
+	border-top: 0px;	
+}
+
+.metismenu > li > ul > li > ul	> li > a {
+	padding-left: 25px;
+}
+
+.metismenu > li > ul > li > ul	> li > ul > li > a {
+	padding-left: 40px;
+}
+
+.parsley-asterisk {
+	color: red;
+}
+
+.parsley-asterisk .hidden {
+	display: none;
+}
+
+tr.group, tr.group:hover {
+	background-color: #ddd !important;
+}
+
+.btn-xs-valign-bottom {
+	padding-top: 8px;
+}
+
+.panel-primary-background {
+	background-color: #008cba;
+	color: #ffffff;
+}
+
+.center-align {
+	text-align: center;
+}

@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS `tb_supplier_bankacc`;
+
+CREATE TABLE `tb_supplier_bankacc` (
+  `supplier_id` int(11) DEFAULT NULL,
+  `bankacc_id` 	int(11) DEFAULT NULL
+);
+
+COMMIT;

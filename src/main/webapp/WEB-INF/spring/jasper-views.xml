@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/util 
+		                http://www.springframework.org/schema/util/spring-util.xsd">
+	
+	<bean id="user_pdf"
+			class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"			
+			p:url="/WEB-INF/jasper/reportUser.jrxml"
+			p:reportDataKey="datasource" /> 
+	<bean id="user_xls"
+			class="org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView"
+			p:url="/WEB-INF/jasper/reportUser.jrxml"
+			p:reportDataKey="datasource" />
+	<bean id="user_html"
+			class="org.springframework.web.servlet.view.jasperreports.JasperReportsHtmlView"
+			p:url="/WEB-INF/jasper/reportUser.jrxml"
+			p:reportDataKey="datasource">
+			<property name="exporterParameters">
+		         <map>
+		             <entry key="net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN">
+		                <value>false</value>
+		            </entry>
+		         </map>			
+			</property>
+	</bean>
+	<bean id="user_csv"
+			class="org.springframework.web.servlet.view.jasperreports.JasperReportsCsvView"
+			p:url="/WEB-INF/jasper/reportUser.jrxml"
+			p:reportDataKey="datasource" />
+
+	<bean id="po_pdf"
+			class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"			
+			p:url="/WEB-INF/jasper/po.jrxml" 
+			p:subReportUrls-ref="customSubReportUrls"/>
+				
+	<bean id="so_pdf"
+			class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"			
+			p:url="/WEB-INF/jasper/so.jrxml" 
+			p:subReportUrls-ref="customSoSubReportUrls"/>
+			
+	<bean id="po_payment_pdf"
+			class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"			
+			p:url="/WEB-INF/jasper/po_payment.jrxml" 
+			p:subReportUrls-ref="customSubReportUrls"/>
+	<bean id="so_payment_pdf"
+			class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"			
+			p:url="/WEB-INF/jasper/so_payment.jrxml" 
+			p:subReportUrls-ref="customSoSubReportUrls"/>
+	<bean id="po_receipt_pdf"
+			class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"			
+			p:url="/WEB-INF/jasper/po_receipt.jrxml" 
+			p:subReportUrls-ref="customSubReportUrls"/>
+	<bean id="so_deliver_pdf"
+			class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"			
+			p:url="/WEB-INF/jasper/so_deliver.jrxml" 
+			p:subReportUrls-ref="customSoSubReportUrls"/>
+	<bean id="stocks_pdf"
+			class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"			
+			p:url="/WEB-INF/jasper/stocks.jrxml" />
+			
+	<util:map id="customSubReportUrls">
+	    <!-- This entry key must be declared exactly as you declared it in the master JRXML file -->
+	    <entry key="JasperCustomSubReportLocation" value="/WEB-INF/jasper/po_items.jrxml"/>
+	</util:map>
+			
+	<util:map id="customSoSubReportUrls">
+	    <!-- This entry key must be declared exactly as you declared it in the master JRXML file -->
+	    <entry key="JasperCustomSubReportLocation" value="/WEB-INF/jasper/so_items.jrxml"/>
+	</util:map>
+</beans>

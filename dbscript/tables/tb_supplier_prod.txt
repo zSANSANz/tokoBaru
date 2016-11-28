@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS `tb_supplier_prod`;
+
+CREATE TABLE `tb_supplier_prod` (
+  `supplier_id` int(11) NOT NULL,
+  `product_id` 	int(11) NOT NULL
+);
+
+COMMIT;

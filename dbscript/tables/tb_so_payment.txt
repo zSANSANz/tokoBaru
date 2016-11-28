@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS `tb_so_payment`;
+
+CREATE TABLE `tb_so_payment` (
+  `so_id` int(11) DEFAULT NULL,
+  `payment_id` int(11) DEFAULT NULL
+);
+
+COMMIT;

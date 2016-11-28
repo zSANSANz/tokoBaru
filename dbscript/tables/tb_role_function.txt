@@ -1,0 +1,102 @@
+DROP TABLE IF EXISTS `tb_role_function`;
+
+CREATE TABLE `tb_role_function` (
+  `role_id` 	int(11) DEFAULT NULL,
+  `function_id` int(11) DEFAULT NULL
+);
+
+/*ADMIN ROLE*/
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 1);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 2);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 3);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 4);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 5);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 6);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 7);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 8);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 9);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 10);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 11);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 12);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 13);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 14);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 15);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 16);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 17);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 18);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 19);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 20);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 21);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 22);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 23);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 24);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 25);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 26);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 27);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 28);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 29);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 30);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 31);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 32);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 33);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 34);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 35);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 36);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 37);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 38);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 39);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 40);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 41);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 42);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 43);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 44);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 45);
+INSERT tb_role_function (role_id, function_id)
+VALUES (1, 46);
+
+COMMIT;

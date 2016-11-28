@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx.xsd
+						">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+    
+    <!-- get benefit of annotations -->
+    
+    <context:annotation-config></context:annotation-config>
+     
+    <!-- properties file holds database connection parameters -->
+    <beans:bean 
+    	id="propertyConfigurer" 
+    	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" 
+        p:ignoreResourceNotFound="true">
+            <beans:property name="locations">
+                <beans:list>
+                    <beans:value>/WEB-INF/spring/jdbc.properties</beans:value>
+                    <beans:value>/WEB-INF/spring/appSettings.properties</beans:value>
+                </beans:list>
+            </beans:property>
+	</beans:bean>
+    
+	<!-- configure datasource -->
+	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+  		<beans:property name="driverClassName" value="${jdbc.driverClassName}" />  
+		<beans:property name="url" value="${jdbc.url}" />  
+  		<beans:property name="username" value="${jdbc.username}" />  
+		<beans:property name="password" value="${jdbc.password}" />  
+ 	</beans:bean>  
+
+    <beans:bean id="dbcpDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <beans:property name="driverClassName" value="${jdbc.driverClassName}" />
+        <beans:property name="url" value="${jdbc.url}" />
+        <beans:property name="username" value="${jdbc.username}" />
+        <beans:property name="password" value="${jdbc.password}" />
+    </beans:bean>
+
+	<!-- AOP Proxy Injection Session -->
+	<beans:bean id="loginContextSession" class="com.tkbaru.model.LoginContext" scope="session">     
+		<aop:scoped-proxy/>
+	</beans:bean>
+
+    <!-- Hibernate 4 SessionFactory Bean definition -->
+    <beans:bean id="hibernateAnnotatedSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<beans:property name="dataSource" ref="dbcpDataSource" />
+        <beans:property name="annotatedClasses">
+            <beans:list>
+            	<beans:value>com.tkbaru.model.Customer</beans:value>
+                <beans:value>com.tkbaru.model.Supplier</beans:value>
+                <beans:value>com.tkbaru.model.Person</beans:value>
+                <beans:value>com.tkbaru.model.BankAccount</beans:value>
+                <beans:value>com.tkbaru.model.PhoneList</beans:value>
+                <beans:value>com.tkbaru.model.Product</beans:value>
+                <beans:value>com.tkbaru.model.ProductUnit</beans:value>
+                <beans:value>com.tkbaru.model.Store</beans:value>
+                <beans:value>com.tkbaru.model.Role</beans:value>
+                <beans:value>com.tkbaru.model.Function</beans:value>
+                <beans:value>com.tkbaru.model.Stocks</beans:value>
+                <beans:value>com.tkbaru.model.Bank</beans:value>
+                <beans:value>com.tkbaru.model.Warehouse</beans:value>
+                <beans:value>com.tkbaru.model.Lookup</beans:value>
+                <beans:value>com.tkbaru.model.Truck</beans:value>
+                <beans:value>com.tkbaru.model.Items</beans:value>
+                <beans:value>com.tkbaru.model.Payment</beans:value>
+                <beans:value>com.tkbaru.model.PurchaseOrder</beans:value>
+                <beans:value>com.tkbaru.model.SalesOrder</beans:value>
+                <beans:value>com.tkbaru.model.Receipt</beans:value>
+                <beans:value>com.tkbaru.model.Price</beans:value>
+                <beans:value>com.tkbaru.model.PriceLevel</beans:value>
+                <beans:value>com.tkbaru.model.SmsIn</beans:value>
+                <beans:value>com.tkbaru.model.SmsOut</beans:value>
+                <beans:value>com.tkbaru.model.Modem</beans:value>
+                <beans:value>com.tkbaru.model.Deliver</beans:value>
+                <beans:value>com.tkbaru.model.StocksOut</beans:value>
+                <beans:value>com.tkbaru.model.TruckMaintenance</beans:value>
+				<beans:value>com.tkbaru.model.SalesOrderCopy</beans:value>
+				<beans:value>com.tkbaru.model.SalesOrderCopyItems</beans:value>
+				<beans:value>com.tkbaru.model.TruckVendor</beans:value>
+				<beans:value>com.tkbaru.model.StocksIn</beans:value>
+				<beans:value>com.tkbaru.model.Calendar</beans:value>
+            </beans:list>
+        </beans:property>
+        <beans:property name="hibernateProperties">
+            <beans:props>
+                <beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</beans:prop>
+                <beans:prop key="hibernate.show_sql">false</beans:prop>
+		        <beans:prop key="hibernate.format_sql">true</beans:prop>
+		        <beans:prop key="hibernate.use_sql_comments">false</beans:prop>
+				<beans:prop key="hibernate.hbm2ddl.auto"></beans:prop>
+				<beans:prop key="hibernate.enable_lazy_load_no_trans">true</beans:prop>
+				<beans:prop key="hibernate.id.new_generator_mappings">false</beans:prop>
+            </beans:props>
+        </beans:property>
+        <beans:property name="packagesToScan">
+        	<beans:list>
+				<beans:value>com.tkbaru.model.Customer</beans:value>
+				<beans:value>com.tkbaru.model.Supplier</beans:value>
+				<beans:value>com.tkbaru.model.Person</beans:value>
+				<beans:value>com.tkbaru.model.BankAccount</beans:value>
+				<beans:value>com.tkbaru.model.PhoneList</beans:value>
+				<beans:value>com.tkbaru.model.Product</beans:value>
+				<beans:value>com.tkbaru.model.ProductUnit</beans:value>
+				<beans:value>com.tkbaru.model.Store</beans:value>
+				<beans:value>com.tkbaru.model.Role</beans:value>
+				<beans:value>com.tkbaru.model.Function</beans:value>
+				<beans:value>com.tkbaru.model.Stocks</beans:value>
+				<beans:value>com.tkbaru.model.Bank</beans:value>
+				<beans:value>com.tkbaru.model.Warehouse</beans:value>
+                <beans:value>com.tkbaru.model.Lookup</beans:value>
+				<beans:value>com.tkbaru.model.Truck</beans:value>
+                <beans:value>com.tkbaru.model.Items</beans:value>
+                <beans:value>com.tkbaru.model.Payment</beans:value>
+                <beans:value>com.tkbaru.model.PurchaseOrder</beans:value>
+                <beans:value>com.tkbaru.model.SalesOrder</beans:value>
+                <beans:value>com.tkbaru.model.Receipt</beans:value>
+                <beans:value>com.tkbaru.model.Price</beans:value>
+                <beans:value>com.tkbaru.model.PriceLevel</beans:value>
+                <beans:value>com.tkbaru.model.SmsIn</beans:value>
+                <beans:value>com.tkbaru.model.SmsOut</beans:value>
+                <beans:value>com.tkbaru.model.Modem</beans:value>
+                <beans:value>com.tkbaru.model.Deliver</beans:value>
+                <beans:value>com.tkbaru.model.StocksOut</beans:value>
+                <beans:value>com.tkbaru.model.TruckMaintenance</beans:value>
+				<beans:value>com.tkbaru.model.SalesOrderCopy</beans:value>
+				<beans:value>com.tkbaru.model.SalesOrderCopyItems</beans:value>
+				<beans:value>com.tkbaru.model.TruckVendor</beans:value>
+				<beans:value>com.tkbaru.model.StocksIn</beans:value>
+				<beans:value>com.tkbaru.model.Calendar</beans:value>
+        	</beans:list>
+        </beans:property>
+    </beans:bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>    
+    
+    <beans:bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+                  
+    <!-- declare spring DAO -->
+    <beans:bean id="SetupDAO" class="com.tkbaru.dao.impl.jdbc.SetupDAOImpl">
+    	<beans:property name="dataSource" ref="dataSource" />
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="UserDAO" class="com.tkbaru.dao.impl.jdbc.UserDAOImpl">
+    	<beans:property name="dataSource" ref="dataSource" />
+    </beans:bean>
+    <beans:bean id="FunctionDAO" class="com.tkbaru.dao.impl.jdbc.FunctionDAOImpl">
+    	<beans:property name="dataSource" ref="dataSource" />
+    </beans:bean>
+	<beans:bean id="PhoneListDAO" class="com.tkbaru.dao.impl.jdbc.PhoneListDAOImpl">
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>
+	<beans:bean id="PersonDAO" class="com.tkbaru.dao.impl.hibernate.PersonDAOImpl">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+	</beans:bean>
+    <beans:bean id="RoleDAO" class="com.tkbaru.dao.impl.hibernate.RoleDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="LookupDAO" class="com.tkbaru.dao.impl.hibernate.LookupDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="SupplierDAO" class="com.tkbaru.dao.impl.hibernate.SupplierDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="CustomerDAO" class="com.tkbaru.dao.impl.hibernate.CustomerDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="ProductDAO" class="com.tkbaru.dao.impl.hibernate.ProductDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="StoreDAO" class="com.tkbaru.dao.impl.hibernate.StoreDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="StocksDAO" class="com.tkbaru.dao.impl.hibernate.StocksDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="BankDAO" class="com.tkbaru.dao.impl.hibernate.BankDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="WarehouseDAO" class="com.tkbaru.dao.impl.hibernate.WarehouseDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="TruckDAO" class="com.tkbaru.dao.impl.hibernate.TruckDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="TruckMtcDAO" class="com.tkbaru.dao.impl.hibernate.TruckMaintenanceDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="PurchaseOrderDAO" class="com.tkbaru.dao.impl.hibernate.PurchaseOrderDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="SalesOrderDAO" class="com.tkbaru.dao.impl.hibernate.SalesOrderDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+     <beans:bean id="PriceDAO" class="com.tkbaru.dao.impl.hibernate.PriceDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="PriceLevelDAO" class="com.tkbaru.dao.impl.hibernate.PriceLevelDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+     <beans:bean id="SmsInDAO" class="com.tkbaru.dao.impl.hibernate.SmsInDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+     <beans:bean id="SmsOutDAO" class="com.tkbaru.dao.impl.hibernate.SmsOutDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+     <beans:bean id="ModemDAO" class="com.tkbaru.dao.impl.hibernate.ModemDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="StocksOutDAO" class="com.tkbaru.dao.impl.hibernate.StocksOutDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="TruckVendorDAO" class="com.tkbaru.dao.impl.hibernate.TruckVendorDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="CustomerMenuDAO" class="com.tkbaru.dao.impl.hibernate.CustomerMenuDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="StocksInDAO" class="com.tkbaru.dao.impl.hibernate.StocksInDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="CalendarDAO" class="com.tkbaru.dao.impl.hibernate.CalendarDAOImpl">
+    	<beans:property name="sessionFactory" ref="hibernateAnnotatedSessionFactory" />
+    </beans:bean>
+    
+    <!-- declare spring Service -->
+    <beans:bean id="loginService" class="com.tkbaru.service.LoginServiceImpl">
+    	<beans:property name="cryptoBCryptPasswordEncoderManager" ref="bCryptPasswordEncoder" />
+    </beans:bean>
+    <beans:bean id="userService" class="com.tkbaru.service.UserServiceImpl">
+    	<beans:property name="cryptoBCryptPasswordEncoderManager" ref="bCryptPasswordEncoder" />
+    </beans:bean>
+    <beans:bean id="personService" class="com.tkbaru.service.PersonServiceImpl"></beans:bean>
+    <beans:bean id="roleService" class="com.tkbaru.service.RoleServiceImpl"></beans:bean>
+    <beans:bean id="functionService" class="com.tkbaru.service.FunctionServiceImpl"></beans:bean>
+    <beans:bean id="lookupService" class="com.tkbaru.service.LookupServiceImpl"></beans:bean>
+    <beans:bean id="SupplierService" class="com.tkbaru.service.SupplierServiceImpl"></beans:bean>
+    <beans:bean id="CustomerService" class="com.tkbaru.service.CustomerServiceImpl"></beans:bean>
+    <beans:bean id="ProductService" class="com.tkbaru.service.ProductServiceImpl"></beans:bean>
+    <beans:bean id="ReportService" class="com.tkbaru.service.ReportServiceImpl"></beans:bean>
+	<beans:bean id="StoreService" class="com.tkbaru.service.StoreServiceImpl"></beans:bean>
+	<beans:bean id="StocksService" class="com.tkbaru.service.StocksServiceImpl"></beans:bean>
+	<beans:bean id="BankService" class="com.tkbaru.service.BankServiceImpl"></beans:bean>
+	<beans:bean id="WarehouseService" class="com.tkbaru.service.WarehouseServiceImpl"></beans:bean>
+	<beans:bean id="TruckService" class="com.tkbaru.service.TruckServiceImpl"></beans:bean>
+	<beans:bean id="PurchaseOrderService" class="com.tkbaru.service.PurchaseOrderServiceImpl"></beans:bean>
+	<beans:bean id="SalesOrderService" class="com.tkbaru.service.SalesOrderServiceImpl"></beans:bean>
+	<beans:bean id="SearchService" class="com.tkbaru.service.SearchServiceImpl"></beans:bean>
+	<beans:bean id="PriceLevelService" class="com.tkbaru.service.PriceLevelServiceImpl"></beans:bean>
+	<beans:bean id="PriceService" class="com.tkbaru.service.PriceServiceImpl"></beans:bean>
+	<beans:bean id="SmsInService" class="com.tkbaru.service.SmsInServiceImpl"></beans:bean>
+	<beans:bean id="SmsOutService" class="com.tkbaru.service.SmsOutServiceImpl"></beans:bean>
+	<beans:bean id="SmsService" class="com.tkbaru.service.SmsServiceImpl"></beans:bean>
+	<beans:bean id="ModemService" class="com.tkbaru.service.ModemServiceImpl"></beans:bean>
+	<beans:bean id="StocksOutService" class="com.tkbaru.service.StocksOutServiceImpl"></beans:bean>
+	<beans:bean id="TruckMtcService" class="com.tkbaru.service.TruckMtcServiceImpl"></beans:bean>
+	<beans:bean id="TruckVendorService" class="com.tkbaru.service.TruckVendorServiceImpl"></beans:bean>
+	<beans:bean id="CustomerMenuService" class="com.tkbaru.service.CustomerMenuServiceImpl"></beans:bean>
+	<beans:bean id="StocksInService" class="com.tkbaru.service.StocksInServiceImpl"></beans:bean>
+	<beans:bean id="CalendarService" class="com.tkbaru.service.CalendarServiceImpl"></beans:bean>
+	
+	<beans:bean id="SetupService" class="com.tkbaru.service.SetupServiceImpl">
+		<beans:property name="cryptoBCryptPasswordEncoderManager" ref="bCryptPasswordEncoder" />
+	</beans:bean>
+	
+	<!-- Jasper -->
+	<beans:import resource="jasper-views.xml" />
+</beans:beans>

@@ -1,0 +1,31 @@
+DROP TABLE IF EXISTS `tb_product`;
+
+CREATE TABLE `tb_product` (
+  `product_id` 			int(11) 		NOT NULL AUTO_INCREMENT,
+  `store_id` 			int(11) 		DEFAULT '0',
+  `product_type` 		varchar(45) 	DEFAULT NULL,
+  `short_code` 			varchar(25) 	DEFAULT NULL,
+  `product_name` 		varchar(95) 	DEFAULT NULL,
+  `product_description` varchar(245) 	DEFAULT NULL,
+  `image_path` 			varchar(145) 	DEFAULT NULL,
+  `status` 				varchar(15) 	DEFAULT NULL,
+  `created_by` 			int(11) 		DEFAULT '0',
+  `created_date` 		datetime 		DEFAULT NULL,
+  `updated_by` 			int(11) 		DEFAULT '0',
+  `updated_date` 		datetime 		DEFAULT NULL,
+  PRIMARY KEY (`product_id`)
+);
+
+/* Palm Oil */
+INSERT INTO tb_product (product_type, short_code, product_name, product_description, status, created_by, created_date)
+VALUES ('L004_ML', 'ML1', 'Minyak Curah', 'Minyak Curah', 'L001_A', 0, (SELECT CURRENT_TIMESTAMP()));
+
+/* Soybean */
+INSERT INTO tb_product (product_type, short_code, product_name, product_description, status, created_by, created_date)
+VALUES ('L004_KDLI', 'BIJO', 'Kedelai Bola Hijau', 'Kedelai Bola Hijau', 'L001_A', 0, (SELECT CURRENT_TIMESTAMP()));
+
+/* Sugar */
+INSERT INTO tb_product (product_type, short_code, product_name, product_description, status, created_by, created_date)
+VALUES ('L004_GL', 'GL1', 'Gula', 'Gula', 'L001_A', 0, (SELECT CURRENT_TIMESTAMP()));
+
+COMMIT;
